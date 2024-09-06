@@ -1,9 +1,9 @@
 {
     "version": 2,
-    "routes": [
+    "redirects": [
         {
             "src": "/(.*)",
-            "dest": "api/server.js"
+            "destination": "api/server.js"
         }
     ]
 }
