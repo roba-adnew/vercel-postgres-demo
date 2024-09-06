@@ -129,6 +129,11 @@ createUser()
 _Note, you must export the app for Vercel to recognize it for deployment_
 
 ```
+mkdir api
+touch api/server.js
+```
+
+```
 const express = require('express')
 const cors = require('cors')
 
