@@ -20,7 +20,7 @@ async function getUsers() {
 app.get('/',
     async (req, res, next) => {
         const users = await getUsers();
-        res.send(`<h1>here are the users: ${users[0].email}</h1>`)
+        res.send(`<h1>here are the users: ${users[0].name}</h1>`)
     }
 )
 
