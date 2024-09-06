@@ -3,7 +3,7 @@
     "redirects": [
         {
             "source": "/(.*)",
-            "destination": "api/server.js"
+            "destination": "server.js"
         }
     ]
 }
