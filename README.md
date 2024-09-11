@@ -6,14 +6,14 @@
 
 1. Getting started
 
--   Create a github repo
--   Clone repo in your local environment and initialize node
+-   Create a github repo and clone it in your local environment. Then, initialize node and commit the changes
     ```
+    git clone _[repo ssh url]_
     npm init
+    _[git add, commit, push]_
     ```
--   Create an existing vercel project
-
-*   Install Vercel CLI and Vercel Postgres
+-   Go to your Vercel dashboard and create a project connected to your Github repo
+-   Install Vercel CLI and Vercel Postgres
     ```
     npm i vercel@latest @vercel/postgres
     ```
