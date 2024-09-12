@@ -8,9 +8,9 @@
 
 -   Create a github repo and clone it in your local environment. Then, initialize node and commit the changes
     ```
-    git clone _[repo ssh url]_
+    git clone [repo ssh url]
     npm init
-    _[git add, commit, push]_
+    [git add > commit > push]
     ```
 -   Go to your Vercel dashboard and create a project connected to your Github repo
 -   Install Vercel CLI and Vercel Postgres
@@ -21,56 +21,66 @@
 2. Create a Postgres database
    In your dashboard on Vercel, create or select the project you want to work on
 
--   Select the Storage tab, then select the Connect Store button
+-   Select the _Storage_ tab, then select the _Connect Store_ button
 -   Select Postgres
 -   Name the db, his _Create and Continue_ and then _Connect_
 
-3. Link the Vercel Project and Pull auto-generated env variables to your local environment
+3. In your local environment, link the Vercel Project
     ```
     vercel link
     ```
     _Follow linking steps_
+    Pull auto-generated env variables.
     ```
-    vercel env pull .env.development.local
+    vercel env pull .env
     ```
 4. Install Prisma Client and Prisma CLI
-   `npm i prisma @prisma/client`
+
+    ```
+    npm i prisma @prisma/client
+    ```
 
 5. Install Typescript, ts-node, and @types/node and initialize Typescript to create tsconfig.json
 
--   `npm i typescript ts-node @types/node`
--   `npx tsc --init`
+    ```
+    npm i typescript ts-node @types/node
+    npx tsc --init
+    ```
 
 6. Create your schema file within a Prisma folder in your root directory, example provided below
 
--   `code prisma/schema.prisma`
+    ```
+    code prisma/schema.prisma
+    ```
 
-```
-generator client {
-    provider = "prisma-client-js"
-}
+    ```
+    generator client {
+        provider = "prisma-client-js"
+    }
 
-datasource db {
-    provider  = "postgresql"
-    // Uses connection pooling
-    url       = env("POSTGRES_PRISMA_URL")
-    // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
-    // or you'll have dangling databases from migrations
-    directUrl = env("POSTGRES_URL_NON_POOLING")
-}
+    datasource db {
+        provider  = "postgresql"
+        // Uses connection pooling
+        url       = env("POSTGRES_PRISMA_URL")
+        // Uses direct connection, ⚠️ make sure to keep this to `POSTGRES_URL_NON_POOLING`
+        // or you'll have dangling databases from migrations
+        directUrl = env("POSTGRES_URL_NON_POOLING")
+    }
 
-model User {
-    id        Int      @id @default(autoincrement())
-    name      String
-    email     String   @unique
-    image     String?
-    createdAt DateTime @default(now())
-}
-```
+    model User {
+        id        Int      @id @default(autoincrement())
+        name      String
+        email     String   @unique
+        image     String?
+        createdAt DateTime @default(now())
+    }
+    ```
 
 7. Run a migration and run prisma generate to update the generated type generations
+    ```
+    npx prisma migrate dev
+    ```
 
--   `npx prisma migrate dev`
 -   Add the following script to your package.json
 
 _Note the final echo hello command to allow Vercel to run it's build command once deployed_
@@ -83,7 +93,9 @@ _Note the final echo hello command to allow Vercel to run it's build command onc
 }
 ```
 
--   `npm run vercel-build`
+    ```
+    npm run vercel-build
+    ```
 
 8. Use a query script to test that the everything is working as expected.
 
@@ -119,6 +131,10 @@ createUser()
     })
 ```
 
+```
+node script.ts
+```
+
 ### Part 2: Setting up your Express App to leverage your database
 
 1. Install express and cors
@@ -127,6 +143,7 @@ createUser()
 2. Set-up a boilerplate server in your root directory.
 
 _Note, you must export the app for Vercel to recognize it for deployment_
+
 ```
 mkdir api
 touch api/server.js
